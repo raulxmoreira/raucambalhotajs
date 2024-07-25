@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rau cambalhota</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  </head>
+  <body>
+    <div class="container">
+      <h1>O gato irá dar uma cambalhota, mas aperte com carinho</h1>
+      <!-- quando clicar o gato dará uma cambalhota -->
+      <img
+        src="https://preview.redd.it/here-are-all-my-silly-cats-for-you-people-v0-zxblx3vyw61c1.jpg?width=640&crop=smart&auto=webp&s=c325f04fb81dd6b32bf43e9011ac11f12ba645fc"
+        alt="gato"
+        id="imagem"
+        class="img"
+      />
+      <!-- a segunda imagem fica no fundo, pois a primeira irá se transformar no gif -->
+      <img
+        src="https://preview.redd.it/here-are-all-my-silly-cats-for-you-people-v0-zxblx3vyw61c1.jpg?width=640&crop=smart&auto=webp&s=c325f04fb81dd6b32bf43e9011ac11f12ba645fc" style="position: absolute; z-index:  -1; top: 90px;" width="250" height="250"
+      id="imagem2"
+        class="img img2"
+      />
+      <p id="mensagem" class="mensagem"></p>
+      <button onclick="virarImagem()" id="Btn-Start" class="girar">
+        Faça o gato girar
+      </button>
+      <button id="btn-reload" onclick="reload()" class="girar">Reiniciar</button>
+      
+    </div>
+
+    <script>
+      var img = document.getElementById("imagem" , "imagem2"); // variavel da imagem
+      var mensagemElement = document.getElementById("mensagem"); // elemento para exibir mensagem
+      var contadorGiros = 0; // O contador começa zerado
+      var maxGiros = Math.floor(Math.random() * 15) + 1; // Número aleatório de giros para explodir
+      var gifSrc =
+        "https://i.gifer.com/origin/8b/8b1b3a0e7a2ff5d84a2248c70a68df19_w200.gif"; // Variavel do gif da explosão
+      var reset = document.getElementById("btn-reload"); //criar a variavel do botão de reiniciar
+      var btnStart = document.getElementById("Btn-Start"); //variavel do botão para girar
+      reset.disabled = true; // Desabilita o botão até que o jogo seja perdido
+      reset.style.boxShadow = "0 0 10px red"; //efeito para destacar o disabled
+      function virarImagem() {
+        //Função para fazer o gato girar
+        contadorGiros++;
+
+        if (contadorGiros < maxGiros) {
+          //caso o contador for menor que o máximo de giros, ele irá rodar
+          img.style.transform = "rotate(" + 360 * contadorGiros + "deg)";
+
+          mensagemElement.innerText = "Numero de cambalhotas: " + contadorGiros; //exibe o contador de giros na tela
+        } else {
+          //quando o contador for maior que o máximo, a imagem irá se transformar no gif de explosão
+          img.style.animation = "rotate 1s";
+          img.src = gifSrc;
+          img.alt = "Gato Explodiu!";
+          mensagemElement.textContent = "Não! O gato explodiu!";
+
+          reset.disabled = false; // fazer o botao de reload ser dessabilitado
+          btnStart.disabled = true; //caso ele exploda, o botão de recarregar irá ser habilitado
+          reset.style.boxShadow = "none";
+
+          btnStart.style.boxShadow = "0 0 10px red"; //efeito para destacar o disabled
+          // Detecta o final da animação
+          img.addEventListener(
+            "animationend",
+            function () {
+              img.src =
+                "https://preview.redd.it/here-are-all-my-silly-cats-for-you-people-v0-zxblx3vyw61c1.jpg?width=640&crop=smart&auto=webp&s=c325f04fb81dd6b32bf43e9011ac11f12ba645fc";
+              img.alt = "gato";
+            },
+            { once: true }
+          );
+        }
+      }
+      function reload() {
+        //função para recarregar a página caso o gato exploda
+        window.location.reload();
+      }
+    </script>
+  </body>
+</html>

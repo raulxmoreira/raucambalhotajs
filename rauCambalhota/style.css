@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img{
+    transition: transform 0.5s; /* Adiciona uma transição suave para a rotação */
+    height: 350px;
+    width: 350px;
+    margin: 5px
+    
+}
+.img img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px
+}
+.img2{
+    position: absolute;
+    z-index: -200000000;
+    margin: 5px;
+    height: 350px;
+    width: 350px;
+}
+
+.img2 img{
+    height: 350px;
+    width: 350px;
+}
+
+.mensagem{
+    text-align: center;
+    color: #000000;
+    font-size: 30px;
+}
+.explodiu{
+     color: transparent;
+    font-size: 30px;
+    background: url('https://media0.giphy.com/media/2HwWFR7TEr8aJS1uQt/200w.gif?cid=6c09b952pss2uyo3v7b79di2mwjz6o9lkki2u0bkw044xj23&ep=v1_gifs_search&rid=200w.gif&ct=g');
+    font-weight: bolder;
+    text-transform: uppercase;
+    background-clip: text;
+    background-color: transparent;
+}
+.girar{
+    background-color: white;
+    border-radius: 5px;
+    width: 200px;
+    height: 80px;
+    transition: 0.5s;
+    margin: 5px;
+    font-size: 25px;
+}
+.girar:hover{
+    background-color: grey;
+    transition: 0.5s;
+}
+
