@@ -32,7 +32,6 @@
 
         <p id="mensagem" class="mensagem"></p>
         <button onclick="virarImagem()" id="btnStart" class="girar">
-            Faça o gato girar
         </button>
     </div>
 
@@ -44,85 +43,81 @@
         var gifSrc =
             "https://i.gifer.com/origin/8b/8b1b3a0e7a2ff5d84a2248c70a68df19_w200.gif"; // Variavel do gif da explosão
         var btnStart = document.getElementById("btnStart"); //variavel do botão para girar
+        btnStart.innerText = "Faça o gato girar";
 
         function virarImagem() {
-            //Função para fazer o gato girar
-            contadorGiros++;
+    contadorGiros++;
 
-            if (contadorGiros < maxGiros) {
-                //caso o contador for menor que o máximo de giros, ele irá rodar
-                audioHoly("assets/holymoly.mp3"); //holly molly
-                img.style.transform = "rotate(" + 360 * contadorGiros + "deg)";
-                mensagemElement.innerText = "Numero de cambalhotas: " + contadorGiros; //exibe o contador de giros na tela
-                
-                // audio de cambalhota que é tocado quando o contador é menor que o máximo
-                function audioHoly(audioFile) {
-                    const audio = new Audio(audioFile);
-                    audio.volume = 1;
-                    audio.currentTime = 1.3;
-                    audio.play();
+    if (contadorGiros < maxGiros) {
+        audioYipeeee("assets/yipeeee.mp3"); //Yipeee
+        img.style.transform = "rotate(" + 360 * contadorGiros + "deg)";
+        mensagemElement.innerText = "Número de cambalhotas: " + contadorGiros; // exibe o contador de giros na tela
+    } else {
+        // Quando o contador for maior ou igual ao máximo, a imagem se transforma no gif de explosão
+        img.style.animation = "rotate 1s";
+        img.src = gifSrc;
+        img.alt = "Gato Explodiu!";
+        mensagemElement.textContent = "Não! O gato explodiu!";
+        audioExplosao("assets/explosao.mp3"); // som de explosão
+        AudioWomp("assets/Womp.mp3"); // som Womp Womp
 
-                    // Parar o áudio após 30 segundos
-                    setTimeout(() => {
-                        audio.pause();
-                        audio.currentTime = 0; // Reinicia para o início do áudio
-                    }, 3000); // 30000 milissegundos = 30 segundos
-                }
-                
-            } else {
-                //quando o contador for maior que o máximo, a imagem irá se transformar no gif de explosão
-                img.style.animation = "rotate 1s";
-                img.src = gifSrc;
-                img.alt = "Gato Explodiu!";
-                mensagemElement.textContent = "Não! O gato explodiu!";
-                audioExplosao("assets/explosao.mp3"); //explosao audio
-                AudioWomp("assets/Womp Womp Sound.mp3"); //Womp Womp
+        // Transformar o botão de girar no botão de resetar
+        btnStart.innerText = "Reiniciar";
+        btnStart.onclick = function() {
+            window.location.reload();
+        };
 
-                // Transformar o botão de girar no botão de resetar
-                btnStart.innerText = "Reiniciar";
-                btnStart.onclick = function() {
-                    window.location.reload();
-                };
+        // Detecta o final da animação
+        img.addEventListener(
+            "animationend",
+            function () {
+                img.src =
+                    "https://preview.redd.it/here-are-all-my-silly-cats-for-you-people-v0-zxblx3vyw61c1.jpg?width=640&crop=smart&auto=webp&s=c325f04fb81dd6b32bf43e9011ac11f12ba645fc";
+                img.alt = "gato";
+            },
+            { once: true }
+        );
+    }
+}
 
-                // Detecta o final da animação
-                img.addEventListener(
-                    "animationend",
-                    function () {
-                        img.src =
-                            "https://preview.redd.it/here-are-all-my-silly-cats-for-you-people-v0-zxblx3vyw61c1.jpg?width=640&crop=smart&auto=webp&s=c325f04fb81dd6b32bf43e9011ac11f12ba645fc";
-                        img.alt = "gato";
-                    },
+function audioYipeeee(audioFile) {
+    const audio = new Audio(audioFile);
+    audio.volume = 1;
+    audio.currentTime = 0.3;
+    audio.play();
 
-                    { once: true }
-                );
-            }
+    // Parar o áudio após 3 segundos
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // Reinicia para o início do áudio
+    }, 3000); // 3000 milissegundos = 3 segundos
+}
 
-            function audioExplosao(audioFile) {
-                const audio = new Audio(audioFile);
-                audio.volume = 1;
-                audio.currentTime = 0;
-                audio.play();
+function audioExplosao(audioFile) {
+    const audio = new Audio(audioFile);
+    audio.volume = 1;
+    audio.currentTime = 0;
+    audio.play();
 
-                // Parar o áudio após 30 segundos
-                setTimeout(() => {
-                    audio.pause();
-                    audio.currentTime = 0; // Reinicia para o início do áudio
-                }, 3000); // 30000 milissegundos = 30 segundos
-            }
+    // Parar o áudio após 3 segundos
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // Reinicia para o início do áudio
+    }, 3000); // 3000 milissegundos = 3 segundos
+}
 
-            function AudioWomp(audioFile) {
-                const audioW = new Audio(audioFile);
-                audio.volume = 1;
-                audio.currentTime = 0;
-                audio.play();
+function AudioWomp(audioFile) {
+    const audioW = new Audio(audioFile);
+    audioW.volume = 1;
+    audioW.currentTime = 0;
+    audioW.play();
 
-                // Parar o áudio após 30 segundos
-                setTimeout(() => {
-                    audio.pause();
-                    audio.currentTime = 0; // Reinicia para o início do áudio
-                }, 3000); // 30000 milissegundos = 30 segundos
-            }
-        }
+    // Parar o áudio após 3 segundos
+    setTimeout(() => {
+        audioW.pause();
+        audioW.currentTime = 0; // Reinicia para o início do áudio
+    }, 3000); // 3000 milissegundos = 3 segundos
+}
 
         
     </script>
